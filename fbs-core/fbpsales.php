@@ -11,6 +11,15 @@ function fbpsales() {
     $mc = count($configData['markets']);
 
 	foreach($playerData['teams'] as $kp => $player) {
+		// TODO calculate if money is enough
+		//	if not reduce $player['record']['salesSupport']
+		
+		//
+		$playerData['teams'] = $player;
+	}
+	foreach($playerData['teams'] as $kp => $player) {
+		// TODO add money constraint for agent changes
+
         // count agents before add & remove
         $total = 0;
         for($i = 0; $i < $mc; $i++) {
@@ -158,11 +167,9 @@ function fbpsales() {
         $tname = $player['name'];
         $totalOrder = 0;
         for($i = 0; $i < $mc; $i++) {
-//            $sum = sum($factors[$i]['share']);
             if($player['marketAgents'][$i] > 0) {
             	$t = 1 / $marketPC[$i];
                 $player['record']["marketShare_$i"] = $factors[$i]['share'][$tname];
-//				$player['record']["marketShare_$i"] = $factors[$i]['share'][$tname] / $sum;
                 $order = floor($player['record']["marketShare_$i"] * $marketSize);
 				$totalOrder += $order;
                 $player['record']["marketOrder_$i"] = $order;

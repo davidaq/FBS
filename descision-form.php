@@ -93,9 +93,9 @@
                 <div class="controls">
                     <div class="btn-group" data-toggle="buttons-radio">
                         <button class="btn agentAdd"><i class="icon-plus-sign"></i></button>
+                    	<button class="btn agentUnchanged"><i class="icon-resize-horizontal"></i> Unchanged</button>
                         <button class="btn agentRem"><i class="icon-minus-sign"></i></button>
                     </div>
-                    <button onclick="resetRadio(this)" class="btn"><i class="icon-resize-horizontal"></i> Unset</button>
                 </div>
             </div>
         <?php } ?>

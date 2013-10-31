@@ -11,6 +11,10 @@ function fbphire()
 	$workersSalaryMax = 0;
 	foreach($playerData['teams'] as $k => $player)
 	{
+		// TODO calculate if money is enough for workers
+		//	if not reduce $player['record']['workersOrdered'] directly
+		
+		// ---------------
 		$workersOrdered = $player['record']['workersOrdered'];
 		$workersSalary = $player['record']['workersSalary'] * 3;
 		$workersSalaryMax = max($workersSalary, $workersSalaryMax);
@@ -63,6 +67,10 @@ function fbphire()
     $engineersSalaryMax = 0;
     foreach($playerData['teams'] as $k => $player)
     {
+		// TODO calculate if money is enough for engineers
+		//	if not reduce $player['record']['engineersOrdered'] directly
+		
+		// ---------------
         $engineersOrdered = $player['record']['engineersOrdered'];
         $engineersSalary = $player['record']['engineersSalary'] * 3;
         $engineersSalaryMax = max($engineersSalaryMax, $engineersSalary);
