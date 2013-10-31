@@ -31,4 +31,4 @@ if(R('cango')) {
 	}
 	die(json_encode($return));
 }
-callcore(R('gid'), 'startround;;loan;;hire;;produce;;sales', 'afterrun.php?gid=' . R('gid'));
+callcore(R('gid'), 'startround;;directsales;;loan;;hire;;produce;;sales', 'afterrun.php?gid=' . R('gid'));

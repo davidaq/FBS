@@ -59,7 +59,7 @@ function fbpsales() {
         for($i = 0; $i < $mc; $i++) {
             $player['record']["salesSupport_$i"] = $player['record']['salesSupportPerAgent'] * $player['marketAgents'][$i];
         }
-		$player['cash'] -= $addCost + $removeCost + $player['record']['salesSupport'] * 1;
+		$player['cash'] -= $addCost + $removeCost + $player['record']['salesSupport'] * 1 + $player['record']['adBonusCost'] * 1;
         $playerData['teams'][$kp] = $player;
     }
     
