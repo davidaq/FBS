@@ -5,6 +5,62 @@
   </div>
   <div class="modal-body" style="max-height:350px">
     <div class="form-horizontal">
+        <h4>Direct Sales</h4>
+        <div class="control-group">
+            <label class="control-label" for="sellStorage">
+                Sell storage:
+            </label>
+            <div class="controls">
+                <input type="text" id="sellStorage" placeholder="0" name="sellStorage"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="sellStorageIncome">
+                Sell storage total income:
+            </label>
+            <div class="controls">
+                <input type="text" id="sellStorageIncome" placeholder="0" name="sellStorageIncome"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="buyStorage">
+                Buy storage:
+            </label>
+            <div class="controls">
+                <input type="text" id="buyStorage" placeholder="0" name="buyStorage"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="buyStorageCost">
+                Buy storage total cost:
+            </label>
+            <div class="controls">
+                <input type="text" id="buyStorageCost" placeholder="0" name="buyStorageCost"/>
+            </div>
+        </div>
+        <h4>Sales Support Bonus</h4>
+        <div class="control-group">
+            <label class="control-label" for="adBonus">
+                <span class="tiped" title="Add funds directly to sales support">
+                    <i class="icon-info-sign"></i>
+                	Advertisement bonus:
+                </span>
+            </label>
+            <div class="controls">
+                <input type="text" id="adBonus" placeholder="0" name="adBonus"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="adBonusCost">
+                <span class="tiped" title="Subtracted directly from total balance">
+                    <i class="icon-info-sign"></i>
+                	Advertisement cost:
+                </span>
+            </label>
+            <div class="controls">
+                <input type="text" id="adBonusCost" placeholder="0" name="adBonusCost"/>
+            </div>
+        </div>
         <h4>Loan and Payback</h4>
         <div class="control-group">
             <label class="control-label" for="loan">
