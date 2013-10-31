@@ -13,6 +13,8 @@ function fbphire()
 	{
 		// TODO calculate if money is enough for workers
 		//	if not reduce $player['record']['workersOrdered'] directly
+
+		$configData['Maximum auto loan']
 		
 		// ---------------
 		$workersOrdered = $player['record']['workersOrdered'];
