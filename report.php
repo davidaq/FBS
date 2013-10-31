@@ -361,7 +361,7 @@ $mc = getVal('marketcount');
 		<td>total</td>
 	</tr>
 	<tr>
-		<td>{:getVal('marketReportOrdered')} * {:getVal('Market report cost per market quarter')} = {:getVal('marketReportCost')}</td>
+		<td>{:getVal('marketReportOrdered')} x {:getVal('Market report cost per market quarter')} = {:getVal('marketReportCost')}</td>
 		<td>{:getVal('adBonusCost')}</td>
 		<td>{:getVal('consultantCost')}</td>
 		<td class="hl">{:getVal('marketingCost')}</td>
