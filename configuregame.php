@@ -461,6 +461,20 @@ function cancel() {
                     </div>
                 </div>
                 <div class="control-group">
+                    <label class="control-label" for="iQualityStorageFactor">
+                        <span class="tiped" title="QualityPerProduct = QualityCost / (ProductOrdered + QualityStorageFactor * ProductStorage)">
+                            <i class="icon-info-sign"></i>
+                            Quality storage factor:
+                        </span>
+                    </label>
+                    <div class="controls">
+                        <div class="input-append">
+                            <input type="text" id="iQualityStorageFactor" placeholder="100" class="input-small" name="Quality storage factor"/>
+                            <span class="add-on">%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
                     <label class="control-label" for="iSalesPowerInfluence">
                         Sales power influence:
                     </label>

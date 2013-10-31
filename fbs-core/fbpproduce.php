@@ -39,12 +39,13 @@ function fbpproduce()
 	    $player['record']['componentsStorageTotalCost'] = $compStorageCost;
 	    $player['record']['componentsTotalCost'] = $componentCost + $compStorageCost;
 	    $player['record']['productsProduced'] = $products;
+	    $productNum = $order + $configData['Quality storage factor'] * $player['record']['productsStored'];
 	    $player['record']['productsStored'] = $products + $player['record']['productsStored'];
 	    $prodMatCost = $products * $prdMatCost;
 	    $player['record']['productsMaterialCost'] = $prodMatCost;
 	    $qCost = $player['record']['qualityCost'];
 	    $player['cash'] -= $qCost + $componentCost + $compStorageCost + $prodMatCost;
-	    $player['record']['qualityCostPerProduct'] = $order > 0 ? $qCost/$order : 0;			
+	    $player['record']['qualityCostPerProduct'] = $productNum > 0 ? $qCost/$productNum : 0;
 		$playerData['teams'][$k] = $player;
 	}
 }		
