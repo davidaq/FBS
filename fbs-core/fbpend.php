@@ -19,8 +19,8 @@
 	        $player['record']['componentsStorageChange'] = $player['record']['componentsStored'] - $player['record']['componentsStorageBeforeDecision'];
 	        $player['record']['productsStorageChange'] = $player['record']['productsStored'] - $player['record']['productsStorageBeforeDecision'];
 	        $player['record']['storageTotalCost'] = $player['record']['componentsStorageTotalCost'] + $player['record']['productsStorageTotalCost'];
-	        $player['record']['totalCashInflow'] = $player['record']['loan'] + $player['record']['salesProfit'] + $player['record']['bonus'];
-	        $player['record']['totalCashOutflow'] = $player['record']['payback'] + $player['record']['HRCost'] + $player['record']['productionCost'] + $player['record']['marketingCost'] + $player['record']['salesCost'];
+	        $player['record']['totalCashInflow'] = $player['record']['loan'] + $player['record']['salesProfit'] + $player['record']['bonus'] + 1 * $player['record']['sellStorageIncome'];
+	        $player['record']['totalCashOutflow'] = $player['record']['payback'] + $player['record']['HRCost'] + $player['record']['productionCost'] + $player['record']['marketingCost'] + $player['record']['salesCost'] + 1 * $player['record']['buyStorageCost'];
 		    $playerData['teams'][$kp] = $player;
 		}
 	    $playerData['global']['componentsUnitStorageCost'] = $configData['Component storage cost per quarter'];
