@@ -1,0 +1,286 @@
+<h1>Team: ${team_name} &nbsp;&nbsp;&nbsp;&nbsp; Round: ${round}</h1>
+<h2>Key Metrics</h2>
+<table border=0 cellspacing=0>
+	<tr class="head">
+		<td>Cash before decision</td>
+		<td>Net Cashflow (Profit/Loss)</td>
+		<td>Cash for next round</td>
+		<td>Debt</td>
+		<td>Ranking</td>
+	</tr>
+	<tr>
+		<td>${cashBeforeDecision}</td>
+		<td>${netCashflow}</td>
+		<td>${cashAvailableForNextRound}</td>
+		<td>${debt}</td>
+		<td>${ranking}</td>
+	</tr>
+</table>
+<h2>Financials</h2>
+<table border=0 cellspacing=0>
+	<tr class="head">
+		<td>Cash Outflow</td>
+		<td>RMB</td>
+		<td>Cash Inflow</td>
+		<td>RMB</td>
+	</tr>
+	<tr>
+		<td>HR cost</td>
+		<td>${HRCost}</td>
+		<td>Sales revenue</td>
+		<td>${salesProfit}</td>
+	</tr>
+	<tr>
+		<td>Production cost</td>
+		<td>${productionCost}</td>
+		<td>Project bonus revenue</td>
+		<td>${bonus}</td>
+	</tr>
+	<tr>
+		<td>Sales cost</td>
+		<td>${salesCost}</td>
+		<td rowspan="2" colspan="2"></td>
+	</tr>
+	<tr>
+		<td>Marketing cost</td>
+		<td>${marketingCost}</td>
+	</tr>
+	<tr>
+		<td>Loan payback</td>
+		<td>${payback}</td>
+		<td>Loan</td>
+		<td>${loan}</td>
+	</tr>
+	<tr class="hl">
+		<td>Total cash outflow</td>
+		<td>${totalCashOutflow}</td>
+		<td>Total cash inflow</td>
+		<td>${totalCashInflow}</td>
+	</tr>
+</table>
+<h2>HR (Human Resources)</h2>
+<table border=0 cellspacing=0>
+	<tr class="head">
+		<td>Employees</td>
+		<td>ordered</td>
+		<td>hired</td>
+		<td>left</td>
+		<td>available</td>
+		<td>working</td>
+		<td>idle</td>
+		<td>average salary</td>
+		<td>salary</td>
+		<td>total cost</td>
+	</tr>
+	<tr>
+		<td>workers</td>
+		<td>${workersOrdered}</td>
+		<td>${workersHired}</td>
+		<td>${workersLeft}</td>
+		<td>${workersAvailable}</td>
+		<td>${workersWorking}</td>
+		<td>${workersIdle}</td>
+		<td>${workersAverageSalary}</td>
+		<td>${workersSalary}</td>
+		<td>${workersTotalCost}</td>
+	</tr>
+	<tr>
+		<td>engineers</td>
+		<td>${engineersOrdered}</td>
+		<td>${engineersHired}</td>
+		<td>${engineersLeft}</td>
+		<td>${engineersAvailable}</td>
+		<td>${engineersWorking}</td>
+		<td>${engineersIdle}</td>
+		<td>${engineersAverageSalary}</td>
+		<td>${engineersSalary}</td>
+		<td>${engineersTotalCost}</td>
+	</tr>
+	<tr>
+		<td class="pad" colspan="9"></td>
+		<td class="hl">${HRCost}</td>
+	</tr>
+</table>
+<h2>Production</h2>
+<table border=0 cellspacing=0>
+	<tr class="head">
+		<td>Production</td>
+		<td>ordered</td>
+		<td>produced</td>
+		<td>used</td>
+		<td>stored</td>
+		<td>material cost</td>
+		<td>total cost</td>
+	</tr>
+	<tr>
+		<td>components</td>
+		<td></td>
+		<td>${componentsProduced}</td>
+		<td>${componentsUsed}</td>
+		<td>${componentsStored}</td>
+		<td>${componentsMaterialCost}</td>
+		<td>${componentsTotalCost}</td>
+	</tr>
+	<tr>
+		<td>products</td>
+		<td>${productsOrdered}</td>
+		<td>${productsProduced}</td>
+		<td>${totalSatisfiedOrders}</td>
+		<td>${productsStored}</td>
+		<td>${productsMaterialCost}</td>
+		<td>${productsTotalCost}</td>
+	</tr>
+	<tr>
+		<td class="pad" colspan="6"></td>
+		<td class="hl">${productionCost}</td>
+	</tr>
+</table>
+<h3>Storage</h3>
+<table cellspacing="0" border="0">
+	<tr class="head">
+		<td>Warehouse</td>
+		<td>before decision</td>
+		<td>(+ / -)</td>
+		<td>total items</td>
+		<td>storage cost/unit</td>
+		<td>total cost</td>
+	</tr>
+	<tr>
+		<td>components</td>
+		<td>${componentsStorageBeforeDecision}</td>
+		<td>${componentsStorageChange}</td>
+		<td>${componentsStored}</td>
+		<td>${componentsUnitStorageCost}</td>
+		<td>${componentsStorageTotalCost}</td>
+	</tr>
+	<tr>
+		<td>products</td>
+		<td>${productsStorageBeforeDecision}</td>
+		<td>${productsStorageChange}</td>
+		<td>${productsStored}</td>
+		<td>${productsUnitStorageCost}</td>
+		<td>${productsStorageTotalCost}</td>
+	</tr>
+	<tr>
+		<td class="pad" colspan="5"></td>
+		<td class="hl">${storageTotalCost}</td>
+	</tr>
+</table>
+<h3>Quality &amp; R&amp;D</h3>
+<table cellspacing="0" border="0">
+	<tr class="head">
+		<td>ordered products</td>
+		<td>quality cost per product</td>
+		<td>R&amp;D/quality cost</td>
+	</tr>
+	<tr>
+		<td>${productsOrdered}</td>
+		<td>${qualityCostPerProduct}</td>
+		<td class="hl">${qualityCost}</td>
+	</tr>
+</table>
+<h2>Sales</h2>
+<table cellspacing="0" border="0">
+	<tr class="head">
+		<td>Market</td>
+		<td>market share</td>
+		<td>total orders</td>
+		<td>received ordered</td>
+	</tr>
+	<!-- loop -->
+	<tr>
+		<td>${marketName_$$}</td>
+		<td filter="0" percent>${marketShare_$$}</td>
+		<td>${marketSize}</td>
+		<td>${marketOrder_$$}</td>
+	</tr>
+	<!-- end -->
+	<tr>
+		<td class="pad" colspan="3"></td>
+		<td class="hl">${totalReceivedOrders}</td>
+	</tr>
+</table>
+<h3>Revenue</h3>
+<table cellspacing="0" border="0">
+	<tr class="head">
+		<td>received orders</td>
+		<td>satisfied orders</td>
+		<td>unsatisfied orders</td>
+		<td>price</td>
+		<td>sales revenue</td>
+	</tr>
+	<tr>
+		<td>${totalReceivedOrders}</td>
+		<td>${totalSatisfiedOrders}</td>
+		<td>${totalUnsatisfiedOrders}</td>
+		<td>${price}</td>
+		<td class="hl">${salesProfit}</td>
+	</tr>
+</table>
+<h3>Sales Agent Cost</h3>
+<table cellspacing="0" border="0">
+	<tr class="head">
+		<td>Market</td>
+		<td>before decision</td>
+		<td>( + )</td>
+		<td>( - )</td>
+		<td>total sales agent</td>
+		<td>add / remove agent cost</td>
+	</tr>
+	<!-- loop -->
+	<tr>
+		<td>${marketName_$$}</td>
+		<td>${agentsBeforeDecision_$$}</td>
+		<td>${agentsAdd_$$}</td>
+		<td>${agentsRemove_$$}</td>
+		<td>${agents_$$}</td>
+		<td>${agentsChangeCost_$$}</td>
+	</tr>
+	<!-- end -->
+	<tr class="hl">
+		<td>total</td>
+		<td>${agentsBeforeDecision_total}</td>
+		<td>${agentsAdd_total}</td>
+		<td>${agentsRemove_total}</td>
+		<td>${agents_total}</td>
+		<td>${saleAgentsCost}</td>
+	</tr>
+</table>
+<h3>Sale Agent Support / Power</h3>
+<table cellspacing="0" border="0">
+	<tr class="head">
+		<td>Market</td>
+		<td>total sales agents</td>
+		<td>financial support / agent</td>
+		<td>total cost</td>
+	</tr>
+	<!-- loop -->
+	<tr>
+		<td>${marketName_$$}</td>
+		<td filter="0">${agents_$$}</td>
+		<td>${salesSupportPerAgent}</td>
+		<td>${salesSupport_$$}</td>
+	</tr>
+	<!-- end -->
+	<tr>
+		<td class="pad" colspan="3"></td>
+		<td class="hl">${salesSupport}</td>
+	</tr>
+</table>
+<h2>Marketing</h2>
+<table cellspacing="0" border="0">
+	<tr class="head">
+		<td>market reports ordered</td>
+		<td>market report price</td>
+		<td>market report cost</td>
+		<td>consultant cost</td>
+		<td>total</td>
+	</tr>
+	<tr>
+		<td>${marketReportOrdered}</td>
+		<td>${marketReportPrice}</td>
+		<td>${marketReportCost}</td>
+		<td>${consultantCost}</td>
+		<td class="hl">${marketingCost}</td>
+	</tr>
+</table>

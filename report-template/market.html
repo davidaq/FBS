@@ -1,0 +1,37 @@
+<br/>
+<h1>Market Report: ${market_name}</h1>
+<table border=0 cellspacing=0>
+	<tr class="head">
+		<td>Market Population</td>
+		<td>Market Penetration</td>
+		<td>Total available orders</td>
+		<td>Total sales Agents</td>
+		<td>Total Players</td>
+	</tr>
+	<tr>
+		<td>${population}</td>
+		<td percent>${penetration}</td>
+		<td>${orders}</td>
+		<td>${agents}</td>
+		<td>${players}</td>
+	</tr>
+</table>
+
+<table border=0 cellspacing=0>
+	<tr class="head">
+		<td>Team</td>
+		<td>Agents</td>
+		<td>Price</td>
+		<td>Marketshare</td>
+		<td>Orders</td>
+	</tr>
+	<!-- loop -->
+	<tr>
+		<td filter="0">${name_$$}</td>
+		<td>${agents_$$}</td>
+		<td>${price_$$}</td>
+		<td percent>${share_$$}</td>
+		<td>${orders_$$}</td>
+	</tr>
+	<!-- end -->
+</table>

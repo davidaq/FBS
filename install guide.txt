@@ -1,0 +1,6 @@
+部署时请按一下步骤进行：
+* 创建MySql数据库
+* 往数据库导入database.sql
+* 按照数据库设置修改config/config.php
+
+默认有一个用户：admin 密码：123qwe
