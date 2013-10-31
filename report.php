@@ -116,6 +116,12 @@ $mc = getVal('marketcount');
 		<td>{:getVal('bonus')}</td>
 	</tr>
 	<tr>
+		<td>Direct buying cost</td>
+		<td>{:getVal('buyStorageCost')}</td>
+		<td>Direct selling income</td>
+		<td>{:getVal('sellStorageIncome')}</td>
+	</tr>
+	<tr>
 		<td>Sales cost</td>
 		<td>{:getVal('salesCost')}</td>
 		<td rowspan="2" colspan="2"></td>
@@ -264,7 +270,7 @@ $mc = getVal('marketcount');
 		<td>Market</td>
 		<td>market share</td>
 		<td>total orders</td>
-		<td>received ordered</td>
+		<td>received orders</td>
 	</tr>
 	<?php for($i = 0; $i < $mc; $i++) {if(getVal('agents_'.$i)==0)continue;?>
 	<tr>
@@ -325,7 +331,7 @@ $mc = getVal('marketcount');
 		<td>{:getVal('saleAgentsCost')}</td>
 	</tr>
 </table>
-<h3>Sale Agent Support / Power</h3>
+<h3>Sales Agent Support / Power</h3>
 <table cellspacing="0" border="0">
 	<tr class="head">
 		<td>Market</td>
@@ -349,16 +355,14 @@ $mc = getVal('marketcount');
 <h2>Marketing</h2>
 <table cellspacing="0" border="0">
 	<tr class="head">
-		<td>market reports ordered</td>
-		<td>market report price</td>
-		<td>market report cost</td>
+		<td>market report total cost</td>
+		<td>advertisement cost</td>
 		<td>consultant cost</td>
 		<td>total</td>
 	</tr>
 	<tr>
-		<td>{:getVal('marketReportOrdered')}</td>
-		<td>{:getVal('Market report cost per market quarter')}</td>
-		<td>{:getVal('marketReportCost')}</td>
+		<td>{:getVal('marketReportOrdered')} * {:getVal('Market report cost per market quarter')} = {:getVal('marketReportCost')}</td>
+		<td>{:getVal('adBonusCost')}</td>
 		<td>{:getVal('consultantCost')}</td>
 		<td class="hl">{:getVal('marketingCost')}</td>
 	</tr>
