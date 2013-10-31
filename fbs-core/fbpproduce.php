@@ -14,7 +14,6 @@ function fbpproduce()
 	$hoursInProd = $configData['Hours in a product'];
 	foreach($playerData['teams'] as $k => $player) 
 	{
-		// TODO add money constraint to production
 	    $workers = $player['record']['workersHired'];
 	    $engineers = $player['record']['engineersHired'];
 	    $wp = floor($workers / $workersPerTeam);
@@ -24,6 +23,9 @@ function fbpproduce()
 	    $player['record']['engineersWorking'] = $ep * $engineersPerTeam;
 	    $player['record']['engineersIdle'] = $engineers % $engineersPerTeam;
 	    $components = $wp * floor($hours / $hoursInComp);
+		// TODO add money constraint to components
+		
+		//	    
 	    $player['record']['componentsProduced'] = $components;
 	    $componentCost = $components * $comMatCost;
 	    $player['record']['componentsMaterialCost'] = $componentCost;
@@ -33,6 +35,9 @@ function fbpproduce()
 	    $order = $player['record']['productsOrdered'];
 	    $products = ($prdComCap > $prdMatCap) ? $prdMatCap : $prdComCap;
 	    $products = ($products > $order) ? $order : $products;
+		// TODO add money constraint to production
+		
+		//	    
 	    $components -= $products * $comPerPrd;
 	    $player['record']['componentsUsed'] = $products * $comPerPrd;
 	    $player['record']['componentsStored'] = $components;
