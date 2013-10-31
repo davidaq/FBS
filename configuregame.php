@@ -294,6 +294,16 @@ function cancel() {
                         </div>
                     </div>
                 </div>
+                <div class="control-group">
+                    <label class="control-label" for="iMaxDebt">
+                        Maximum debt:
+                    </label>
+                    <div class="controls">
+                        <div class="input-append">
+                            <input type="text" id="iMaxDebt" placeholder="2000000" class="input-small" name="Maximum debt"/>
+                        </div>
+                    </div>
+                </div>
             </section>
             <section id="production">
                 <div class="page-header">
