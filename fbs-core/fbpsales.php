@@ -55,7 +55,7 @@ function fbpsales() {
 		$player['record']['salesCost'] = $addCost + $removeCost + $player['record']['salesSupport'];
         $total += $addCount - $removeCount;
 		$player['record']['agents_total'] = $total;
-        $player['record']['salesSupportPerAgent'] = floor(100 * $player['record']['salesSupport'] / $total) / 100;
+        $player['record']['salesSupportPerAgent'] = floor(100 * ($player['record']['adBonus'] + $player['record']['salesSupport']) / $total) / 100;
         for($i = 0; $i < $mc; $i++) {
             $player['record']["salesSupport_$i"] = $player['record']['salesSupportPerAgent'] * $player['marketAgents'][$i];
         }
