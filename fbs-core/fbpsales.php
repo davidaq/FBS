@@ -10,7 +10,15 @@ function fbpsales() {
 	$prdStrCost = $configData['Product storage cost per quarter'];
     $mc = count($configData['markets']);
 
+	$maximumAutoLoan = $configData['Maximum auto loan'] * 1;
 	foreach($playerData['teams'] as $kp => $player) {
+		if($player['cash'] - $player['record']['salesSupport'] < -$maximumAutoLoan) {
+	       $player['record']['salesSupport'] = $player['cash'] + $maximumAutoLoan;
+	       if($player['record']['salesSupport'] < 0) {
+	       	  $player['record']['salesSupport'] = 0;
+	       }
+        }
+        $player['cash'] -= $player['record']['salesSupport'];
         // count agents before add & remove
         $total = 0;
         for($i = 0; $i < $mc; $i++) {
@@ -25,13 +33,20 @@ function fbpsales() {
 
         // add agents
         $addCount = 0;
+        $budget = $player['cash'] + $maximumAutoLoan;
         if(isset($player['record']['saleAgentAdded'])) {
-            foreach($player['record']['saleAgentAdded'] as $i) {
-                $player['marketAgents'][$i]++;
-				$player['record']["agentsAdd_$i"] = 1;
-				$player['record']["agentsChangeCost_$i"] += $addAgentCost;
-				$player['record']["agents_$i"] = $player['marketAgents'][$i];
-				$addCount++;
+            foreach($player['record']['saleAgentAdded'] as $ks=>$i) {
+                $budget -= $addAgentCost;
+                if($budget < 0) {
+                    $budget += $addAgentCost;
+                    unset($player['record']['saleAgentAdded'][$ks]);
+                } else {
+                    $player['marketAgents'][$i]++;
+                    $player['record']["agentsAdd_$i"] = 1;
+                    $player['record']["agentsChangeCost_$i"] += $addAgentCost;
+                    $player['record']["agents_$i"] = $player['marketAgents'][$i];
+                    $addCount++;
+                }
             }
         }
         $addCost = $addCount * $addAgentCost;
@@ -39,7 +54,11 @@ function fbpsales() {
         $removeCount = 0;
         if(isset($player['record']['saleAgentRemoved'])) {
             foreach($player['record']['saleAgentRemoved'] as $i) {
-                if($player['marketAgents'][$i] - ($player['homeMarket'] == $i ? 1 : 0) > 0) {
+                $budget -= $removeAgentCost;
+                if($budget < 0) {
+                    $budget += $removeAgentCost;
+                    unset($player['record']['saleAgentRemoved'][$ks]);
+                } elseif($player['marketAgents'][$i] - ($player['homeMarket'] == $i ? 1 : 0) > 0) {
                     $player['marketAgents'][$i]--;
                     $player['record']["agentsRemove_$i"] = 1;
                     $player['record']["agentsChangeCost_$i"] += $removeAgentCost;
@@ -59,7 +78,7 @@ function fbpsales() {
         for($i = 0; $i < $mc; $i++) {
             $player['record']["salesSupport_$i"] = $player['record']['salesSupportPerAgent'] * $player['marketAgents'][$i];
         }
-		$player['cash'] -= $addCost + $removeCost + $player['record']['salesSupport'] * 1;
+		$player['cash'] -= $addCost + $removeCost;
         $playerData['teams'][$kp] = $player;
     }
     
@@ -158,11 +177,9 @@ function fbpsales() {
         $tname = $player['name'];
         $totalOrder = 0;
         for($i = 0; $i < $mc; $i++) {
-//            $sum = sum($factors[$i]['share']);
             if($player['marketAgents'][$i] > 0) {
             	$t = 1 / $marketPC[$i];
                 $player['record']["marketShare_$i"] = $factors[$i]['share'][$tname];
-//				$player['record']["marketShare_$i"] = $factors[$i]['share'][$tname] / $sum;
                 $order = floor($player['record']["marketShare_$i"] * $marketSize);
 				$totalOrder += $order;
                 $player['record']["marketOrder_$i"] = $order;

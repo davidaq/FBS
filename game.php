@@ -61,6 +61,7 @@ function decision(element) {
     var tname = $(element).closest('tr').find('.teamName').html();
     $('#decisionFormDlg input').val('');
     $('#decisionFormDlg .active').removeClass('active');
+    $('#decisionFormDlg .agentUnchanged').addClass('active');
     $('#teamName').html(tname);
     $('#iTeamName').val(tname);
     setTimeout(function() {
@@ -77,13 +78,17 @@ function decision(element) {
         if(record['saleAgentAdded']) {
             var list = record['saleAgentAdded'];
             for(k in list) {
-                $('.agentMarket:eq(' + list[k] + ')').find('.agentAdd').addClass('active');
+                var x = $('.agentMarket:eq(' + list[k] + ')');
+                x.find('.agentAdd').addClass('active');
+                x.find('.agentUnchanged').removeClass('active');
             }
         }
         if(record['saleAgentRemoved']) {
             var list = record['saleAgentRemoved'];
             for(k in list) {
-                $('.agentMarket:eq(' + list[k] + ')').find('.agentRem').addClass('active');
+                var x = $('.agentMarket:eq(' + list[k] + ')');
+                x.find('.agentRem').addClass('active');
+                x.find('.agentUnchanged').removeClass('active');
             }
         }
         if(record['marketsOrderedReport']) {

@@ -296,11 +296,11 @@ function cancel() {
                 </div>
                 <div class="control-group">
                     <label class="control-label" for="iMaxDebt">
-                        Maximum debt:
+                        Maximum auto loan:
                     </label>
                     <div class="controls">
                         <div class="input-append">
-                            <input type="text" id="iMaxDebt" placeholder="2000000" class="input-small" name="Maximum debt"/>
+                            <input type="text" id="iMaxDebt" placeholder="2000000" class="input-small" name="Maximum auto loan"/>
                         </div>
                     </div>
                 </div>
