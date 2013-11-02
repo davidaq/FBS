@@ -14,7 +14,7 @@ function fbpproduce()
 	$hoursInProd = $configData['Hours in a product'];
 	
 	// Maximum auto loan (presuming it to be a positive number)
-	$maximumAutoLoan = $configData['Maximum auto loan'];
+	$maximumAutoLoan = $configData['Maximum auto loan'] * 1;
 	foreach($playerData['teams'] as $k => $player) 
 	{
 	    $workers = $player['record']['workersHired'];
@@ -42,25 +42,23 @@ function fbpproduce()
 	    $componentCost = $components * $comMatCost;
 	    $player['record']['componentsMaterialCost'] = $componentCost;
 
-       $player['cash'] -= $componentCost;	    
-	    
-	    $components += $player['record']['componentsStored'];
-	    $prdComCap = $ep * floor($hours / $hoursInProd);
-	    $prdMatCap = floor($components / $comPerPrd);
+        $player['cash'] -= $componentCost;	    
+
+        $components += $player['record']['componentsStored'];
+        $prdComCap = $ep * floor($hours / $hoursInProd);
+        $prdMatCap = floor($components / $comPerPrd);
 	    $order = $player['record']['productsOrdered'];
 	    $products = ($prdComCap > $prdMatCap) ? $prdMatCap : $prdComCap;
 	    $products = ($products > $order) ? $order : $products;
-		// TODO add money constraint to production
-		 $cashAfterwards = $player['cash'] - $products * $prdMatCost;
-		 if($cashAfterwards < -$maximumAutoLoan)
-		 {
-		 	  $products = floor(($player['cash'] + $maximumAutoLoan) / $prdMatCost);
-		 	  if($products < 0)
-		 	  {
-		 	      $products = 0;
-		 	  }
-		 }
-		//	    
+        // TODO add money constraint to production
+        $cashAfterwards = $player['cash'] - $products * $prdMatCost;
+        if($cashAfterwards < -$maximumAutoLoan) {
+            $products = floor(($player['cash'] + $maximumAutoLoan) / $prdMatCost);
+            if($products < 0) {
+                $products = 0;
+            }
+        }
+        //	    
 	    $components -= $products * $comPerPrd;
 	    $player['record']['componentsUsed'] = $products * $comPerPrd;
 	    $player['record']['componentsStored'] = $components;
@@ -70,15 +68,13 @@ function fbpproduce()
 	    $player['record']['productsProduced'] = $products;
 	    $productNum = $order + $configData['Quality storage factor'] * $player['record']['productsStored'];
 	    $player['record']['productsStored'] = $products + $player['record']['productsStored'];	    
+	    $prodMatCost = $products * $prdMatCost;
 	    $player['cash'] -= $prodMatCost;
 	    $player['record']['productsMaterialCost'] = $prodMatCost;
-	    $prodMatCost = $products * $prdMatCost;
 	    // TODO money check for $player['record']['qualityCost']
-	    if($player['cash'] - $player['record']['qualityCost'] < -$maximumAutoLoan)
-	    {
+	    if($player['cash'] - $player['record']['qualityCost'] < -$maximumAutoLoan) {
 	       $player['record']['qualityCost'] = $player['cash'] + $maximumAutoLoan;
-	       if($player['record']['qualityCost'] < 0)
-	       {
+	       if($player['record']['qualityCost'] < 0) {
 	       	  $player['record']['qualityCost'] = 0;
 	       }
 	    }

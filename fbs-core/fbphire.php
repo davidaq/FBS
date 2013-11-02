@@ -11,7 +11,7 @@ function fbphire()
 	$workersSalaryMax = 0;
 	
 	// Maximum auto loan (presuming it to be a positive number)
-	$maximumAutoLoan = $configData['Maximum auto loan'];
+	$maximumAutoLoan = $configData['Maximum auto loan'] * 1;
 	foreach($playerData['teams'] as $k => $player)
 	{
 
