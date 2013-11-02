@@ -299,9 +299,7 @@ function cancel() {
                         Maximum auto loan:
                     </label>
                     <div class="controls">
-                        <div class="input-append">
-                            <input type="text" id="iMaxDebt" placeholder="2000000" class="input-small" name="Maximum auto loan"/>
-                        </div>
+                        <input type="text" id="iMaxDebt" placeholder="2000000" class="input" name="Maximum auto loan"/>
                     </div>
                 </div>
             </section>
