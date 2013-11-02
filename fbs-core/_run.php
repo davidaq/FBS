@@ -9,6 +9,17 @@ if(!$playerData) {
 		'global' => array()
 	);
 }
+function toNumber($array) {
+    foreach($array as $k=>$v) {
+        if(is_array($v)) {
+            $v = toNumber($v);
+        } elseif(is_numeric($v)) {
+            $v = $v * 1;
+        }
+        $array[$k] = $v;
+    }
+    return $array;
+}
 foreach($playerData['teams'] as $k=>$p) {
 	if(!isset($p['record']))
 		$p['record'] = array();
@@ -18,7 +29,8 @@ foreach($playerData['teams'] as $k=>$p) {
 	$playerData['teams'][$k] = $p;
 }
 $processList = explode(';;', $_SESSION['_runProc']);
-
+$configData = toNumber($configData);
+$playerData = toNumber($playerData);
 foreach($processList as $f) {
 	$f = 'fbp' . $f;
 	include $f . '.php';

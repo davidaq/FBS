@@ -26,18 +26,16 @@ function fbpproduce()
 	    $player['record']['engineersWorking'] = $ep * $engineersPerTeam;
 	    $player['record']['engineersIdle'] = $engineers % $engineersPerTeam;
 	    $components = $wp * floor($hours / $hoursInComp);
-		// TODO add money constraint to components
-		 $cashAfterwards = $player['cash'] - $components * $comMatCost;
-		 if($cashAfterwards < - $maximumAutoLoan)
-		 {
-		 	  $components = 	floor( ($player['cash'] + $maximumAutoLoan) / $comMatCost);
-		 	  if($components < 0)
-		 	  {
-		 	  	    $components = 0
-		 	  }
-		 }
-		 
-		//	    
+        // TODO add money constraint to components
+        $cashAfterwards = $player['cash'] - $components * $comMatCost;
+        if($cashAfterwards < - $maximumAutoLoan) {
+            $components = 	floor( ($player['cash'] + $maximumAutoLoan) / $comMatCost);
+            if($components < 0) {
+                $components = 0;
+            }
+        }
+
+        //	    
 	    $player['record']['componentsProduced'] = $components;
 	    $componentCost = $components * $comMatCost;
 	    $player['record']['componentsMaterialCost'] = $componentCost;
