@@ -81,20 +81,44 @@ $mc = getVal('marketcount');
 <h2>Key Metrics</h2>
 <table border=0 cellspacing=0>
 	<tr class="head">
-		<td>Cash before decision</td>
-		<td>Net Cashflow (Profit/Loss)</td>
-		<td>Cash for next round</td>
+		<td>Cash before</td>
+		<td>Net Cashflow (+Profit / -Loss)</td>
+		<td>Cash for now</td>
 		<td>Debt</td>
+		<td>Net property</td>
 		<td>Ranking</td>
 	</tr>
 	<tr>
 		<td>{:getVal('cashBeforeDecision')}</td>
-		<td>{:getVal('netCashflow')}</td>
+		<td>{:getVal('netCashflow')>0?'+':''}{:getVal('netCashflow')}</td>
 		<td>{:getVal('cashAvailableForNextRound')}</td>
 		<td>{:getVal('debt')}</td>
+		<td>{:getVal('cashAvailableForNextRound') - getVal('debt')}</td>
 		<td>{:getVal('ranking')}</td>
 	</tr>
 </table>
+<div>
+    <em><strong>Remark:</strong> 
+    <?php
+    if(getVal('netCashflow') > 0) {
+        if(getVal('loan') > 0) {
+            echo 'Don\'t be fooled, <b>loans</b> are counted into <b>cash</b>. <b>Net property</b> is what you really own.';
+        } elseif(getVal('ranking') == 1) {
+            echo 'Nice job. You\'re doing the best. At least for now.';
+        } elseif(getVal('debt') > 0) {
+            echo 'Interest will cause rapid debt increase. Repay as early as possible';
+        } else {
+            echo 'Keep up the good work. You\'re making moeny.';
+        }
+    } else {
+        if(getVal('cashAvailableForNextRound') <= -getVal('Maximum auto loan')) {
+            echo 'Production and sales were cut off due to insufficient funds. Prepare enough money next time.';
+        } else {
+            echo 'Not making money for this quarter.';
+        }
+    }
+    ?></em>
+</div>
 <h2>Finance</h2>
 <table border=0 cellspacing=0>
 	<tr class="head">
@@ -131,7 +155,7 @@ $mc = getVal('marketcount');
 		<td>{:getVal('marketingCost')}</td>
 	</tr>
 	<tr>
-		<td>Loan payback</td>
+		<td>Loan repayment</td>
 		<td>{:getVal('payback')}</td>
 		<td>Loan</td>
 		<td>{:getVal('loan')}</td>
