@@ -184,25 +184,44 @@ foreach($classes as $classkey=>$class) {
 // Copy beans
 foreach($beans as $beanName=>$file) {
 	$c = file_get_contents($file);
-	$c = preg_replace('/package .*?;/', "package bean.$beanName;", $c);
+	$c = preg_replace('/package .*?;/', "package bean;", $c);
 	$c = preg_replace('/import cc\.ccme\..*?\.bean\..*?;/', '', $c);
+	$c = preg_replace('/import .*?\.Serializable;/', '', $c);
+	$c = preg_replace('/import org\.springframework\..*?;/', '', $c);
+	$c = preg_replace('/import lombok\..*?;/', '', $c);
+	$c = str_replace('CommonsMultipartFile', 'java.io.File', $c);
+	$c = str_replace('private', 'public', $c);
+	if(!preg_match('/\bList\b/', $c))
+		$c = preg_replace('/import java\.util\..*?;/', '', $c);
+	$c = preg_replace('/\/\*.*?\*\//s', '', $c);
+	$c = preg_replace('/implements\s+Serializable.*?{/s', '{', $c);
+	$c = preg_replace('/public(\s+[a-zA-Z0-9_]*?)(\s+[a-zA-Z0-9_]*?)?\s*\(.*?\).*?\{.*?\}/s', '', $c);
+	$c = preg_replace('/@[a-zA-Z0-9_]+(\(.*?\))?/', '', $c);
+	$c = preg_replace('/[\n\r]\s+[\n\r]/', "\n", $c);
 	file_put_contents("bean/$beanName.java", $c);
 }
+$usedBeans = array();
 // generate service
 foreach($classes as $className=>$class) {
 	$c = "package service;\n";
+	$c .= "import util.RequestObject;\n";
+	$c .= "import bean.*;\n";
 	$c .= "public final class $className {\n";
 	foreach($class as $function) {
 		$params = array();
+		$m = str_replace('[]', '', $function['return']);
+		$usedBeans[$m] = 1;
 		foreach($function['params'] as $p) {
 			$params[] = "$p[type] $p[var]";
+		$m = str_replace('[]', '', $p['type']);
+			$usedBeans[$m] = 1;
 		}
 		$params = implode(', ', $params);
 		$cmfname = $function['name'];
 		$cmfname = strtoupper($cmfname{0}) . substr($cmfname, 1);
-		$c .= "\t\tpublic static interface On{$cmfname}SuccessListener() {\n";
+		$c .= "\t\tpublic static interface On{$cmfname}SuccessListener {\n";
 		$arg = $function['return'] ? "$function[return] result" : '';
-		$c .= "\t\t\ton{$cmfname}Success($arg);\n";
+		$c .= "\t\t\tpublic void on{$cmfname}Success($arg);\n";
 		$c .= "\t\t}\n\n";
 		$c .= "\t\tpublic static RequestObject<On{$cmfname}SuccessListener> $function[name]($params) {\n";
 		$c .= "\t\t\tRequestObject<On{$cmfname}SuccessListener> obj = new RequestObject<On{$cmfname}SuccessListener>();\n";
@@ -225,4 +244,9 @@ foreach($classes as $className=>$class) {
 	}
 	$c .= "}\n";
 	file_put_contents("service/$className.java", $c);
+}
+echo "Unused Beans:\n";
+foreach($beans as $k=>$v) {
+	if(!isset($usedBeans[$k]))
+		echo "\t$k\n";
 }
