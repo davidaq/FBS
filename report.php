@@ -101,9 +101,7 @@ $mc = getVal('marketcount');
     <em><strong>Remark:</strong> 
     <?php
     if(getVal('netCashflow') > 0) {
-        if(getVal('loan') > 0) {
-            echo 'Don\'t be fooled, <b>loans</b> are counted into <b>cash</b>. <b>Net property</b> is what you really own.';
-        } elseif(getVal('ranking') == 1) {
+        if(getVal('ranking') == 1) {
             echo 'Nice job. You\'re doing the best. At least for now.';
         } elseif(getVal('debt') > 0) {
             echo 'Interest will cause rapid debt increase. Repay as early as possible';
@@ -111,8 +109,10 @@ $mc = getVal('marketcount');
             echo 'Keep up the good work. You\'re making moeny.';
         }
     } else {
-        if(getVal('cashAvailableForNextRound') <= -getVal('Maximum auto loan')) {
+        if(getVal('beforeAutoLoanCash') <= -getVal('Maximum auto loan')) {
             echo 'Production and sales were cut off due to insufficient funds. Prepare enough money next time.';
+        } elseif(getVal('loan') > 0) {
+            echo '<b>Loans</b> are not counted into <b>Net Cashflow</b>.';
         } else {
             echo 'Not making money for this quarter.';
         }
@@ -134,21 +134,25 @@ $mc = getVal('marketcount');
 		<td>{:getVal('salesProfit')}</td>
 	</tr>
 	<tr>
-		<td>Production cost</td>
-		<td>{:getVal('productionCost')}</td>
-		<td>Project bonus revenue</td>
-		<td>{:getVal('bonus')}</td>
-	</tr>
-	<tr>
 		<td>Direct buying cost</td>
 		<td>{:getVal('buyStorageCost')}</td>
 		<td>Direct selling income</td>
 		<td>{:getVal('sellStorageIncome')}</td>
 	</tr>
 	<tr>
+		<td>Production cost</td>
+		<td>{:getVal('productsMaterialCost')+getVal('componentsMaterialCost')}</td>
+		<td>Project bonus revenue</td>
+		<td>{:getVal('bonus')}</td>
+	</tr>
+	<tr>
+		<td>Storage cost</td>
+		<td>{:getVal('storageTotalCost')}</td>
+		<td rowspan="3" colspan="2"></td>
+	</tr>
+	<tr>
 		<td>Sales cost</td>
 		<td>{:getVal('salesCost')}</td>
-		<td rowspan="2" colspan="2"></td>
 	</tr>
 	<tr>
 		<td>Marketing cost</td>
@@ -219,7 +223,6 @@ $mc = getVal('marketcount');
 		<td>used</td>
 		<td>stored</td>
 		<td>material cost</td>
-		<td>total cost</td>
 	</tr>
 	<tr>
 		<td>components</td>
@@ -228,7 +231,6 @@ $mc = getVal('marketcount');
 		<td>{:getVal('componentsUsed')}</td>
 		<td>{:getVal('componentsStored')}</td>
 		<td>{:getVal('componentsMaterialCost')}</td>
-		<td>{:getVal('componentsTotalCost')}</td>
 	</tr>
 	<tr>
 		<td>products</td>
@@ -237,11 +239,10 @@ $mc = getVal('marketcount');
 		<td>{:getVal('totalSatisfiedOrders')}</td>
 		<td>{:getVal('productsStored')}</td>
 		<td>{:getVal('productsMaterialCost')}</td>
-		<td>{:getVal('productsTotalCost')}</td>
 	</tr>
 	<tr>
-		<td class="pad" colspan="6"></td>
-		<td class="hl">{:getVal('productionCost')}</td>
+		<td class="pad" colspan="5"></td>
+		<td class="hl">{:getVal('productsMaterialCost')+getVal('componentsMaterialCost')}</td>
 	</tr>
 </table>
 <h3>Storage</h3>
