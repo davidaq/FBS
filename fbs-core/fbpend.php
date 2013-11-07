@@ -6,6 +6,12 @@
    		$rank = array();
 	    foreach($playerData['teams'] as $kp => $player)
 		{
+			if($player['cash'] < 0) {
+				$player['record']['beforeAutoLoanCash'] = $player['cash'];
+				$player['loan'] += -$player['cash'];
+				$player['record']['loan'] += -$player['cash'];
+				$player['cash'] = 0;
+			}
             $_budget = $player['cash'] - $player['loan'];
 			if(!isset($rank[$_budget]))
 			{
@@ -13,7 +19,7 @@
 			}
             $rank[$_budget][] = $kp;
 	        $player['record']['cashAvailableForNextRound'] = $player['cash'];
-	        $player['record']['netCashflow'] = $player['cash'] - $player['record']['cashBeforeDecision'];
+	        $player['record']['netCashflow'] = $player['cash'] - $player['record']['cashBeforeDecision'] - $player['record']['loan'];
 	        $player['record']['HRCost'] = $player['record']['workersTotalCost'] + $player['record']['engineersTotalCost'];
 	        $player['record']['productionCost'] = $player['record']['componentsTotalCost'] + $player['record']['productsTotalCost'];
 	        $player['record']['componentsStorageChange'] = $player['record']['componentsStored'] - $player['record']['componentsStorageBeforeDecision'];
